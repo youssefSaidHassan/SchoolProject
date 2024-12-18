@@ -123,10 +123,16 @@
   <data name="Deleted" xml:space="preserve">
     <value>Deleted Successfully</value>
   </data>
+  <data name="DepartmentId" xml:space="preserve">
+    <value>Department Id</value>
+  </data>
+  <data name="NotExist" xml:space="preserve">
+    <value> Is Not Exist</value>
+  </data>
   <data name="Exist" xml:space="preserve">
     <value>Already Exist</value>
   </data>
-  <data name="MaximumLength10MaximumLength10" xml:space="preserve">
+  <data name="MaximumLength10" xml:space="preserve">
     <value>lenght must be less than 10</value>
   </data>
   <data name="NotEmpty" xml:space="preserve">

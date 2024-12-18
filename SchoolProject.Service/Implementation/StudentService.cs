@@ -67,7 +67,7 @@ namespace SchoolProject.Service.Implementation
             }
             catch (Exception ex)
             {
-                await trans.CommitAsync();
+                await trans.RollbackAsync();
                 return "Falied";
             }
         }

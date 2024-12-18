@@ -9,6 +9,7 @@ namespace SchoolProject.Core.Mapping.StudentMapping
             GetStudentMapping();
             AddStudentCommandMapping();
             EditStudentCommandMapping();
+            GetStudentPaginationMapping();
         }
     }
 }

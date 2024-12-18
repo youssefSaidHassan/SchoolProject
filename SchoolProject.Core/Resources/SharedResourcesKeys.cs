@@ -15,6 +15,8 @@
         public const string Unauthorized = "Unauthorized";
         public const string BadRequest = "BadRequest";
         public const string UnprocessableEntity = "UnprocessableEntity";
+        public const string NotExist = "NotExist";
+        public const string DepartmentId = "DepartmentId";
 
     }
 }

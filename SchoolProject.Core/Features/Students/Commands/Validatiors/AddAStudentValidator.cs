@@ -10,12 +10,16 @@ namespace SchoolProject.Core.Features.Students.Commands.Validatiors
     {
         #region Fields
         private readonly IStudentService _studentService;
+        private readonly IDepartmentServices _departmentServices;
+
         private readonly IStringLocalizer<SharedResources> _stringLocalizer;
         #endregion
         #region Constructors
-        public AddAStudentValidator(IStudentService studentService, IStringLocalizer<SharedResources> stringLocalizer)
+        public AddAStudentValidator(IStudentService studentService, IStringLocalizer<SharedResources> stringLocalizer,
+            IDepartmentServices departmentServices)
         {
             this._studentService = studentService;
+            this._departmentServices = departmentServices;
             this._stringLocalizer = stringLocalizer;
             ApplyeValidationRules();
             ApplyeCustomValidationRules();
@@ -37,6 +41,10 @@ namespace SchoolProject.Core.Features.Students.Commands.Validatiors
 
             RuleFor(s => s.Phone)
                 .Matches("^01[0125][0-9]{8}$").WithMessage(_stringLocalizer[SharedResourcesKeys.PhonePattern]);
+
+            RuleFor(s => s.DepartmentId)
+                .NotEmpty().WithMessage(_stringLocalizer[SharedResourcesKeys.NotEmpty])
+                .NotNull().WithMessage(_stringLocalizer[SharedResourcesKeys.Required]);
         }
 
         private void ApplyeCustomValidationRules()
@@ -47,6 +55,13 @@ namespace SchoolProject.Core.Features.Students.Commands.Validatiors
             RuleFor(s => s.NameAr)
                .MustAsync(async (Key, CancellationToken) => !await _studentService.IsNameExist(Key)
                ).WithMessage(_stringLocalizer[SharedResourcesKeys.Exist]);
+
+
+            RuleFor(s => s.DepartmentId)
+               .MustAsync(async (Key, CancellationToken) => await _departmentServices.IsDepartmentIdExist(Key)
+               ).WithMessage(_stringLocalizer[SharedResourcesKeys.NotExist]);
+
+
         }
         #endregion
 
