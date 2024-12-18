@@ -14,6 +14,7 @@ namespace SchoolProject.Core.Features.Students.Commands.Validatiors
 
         private readonly IStringLocalizer<SharedResources> _stringLocalizer;
         #endregion
+
         #region Constructors
         public AddAStudentValidator(IStudentService studentService, IStringLocalizer<SharedResources> stringLocalizer,
             IDepartmentServices departmentServices)
