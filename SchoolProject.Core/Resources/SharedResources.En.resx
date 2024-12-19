@@ -153,4 +153,19 @@
   <data name="Updated" xml:space="preserve">
     <value>Updated Successfully</value>
   </data>
+  <data name="MaximumLength50" xml:space="preserve">
+    <value>Length must not be bigger than 50</value>
+  </data>
+  <data name="PasswordNotMatches" xml:space="preserve">
+    <value>Password Not Matches</value>
+  </data>
+  <data name="EmailAddress" xml:space="preserve">
+    <value>In Valid Email Address</value>
+  </data>
+  <data name="EmailIsExist" xml:space="preserve">
+    <value>This Email Address Is Already Exist</value>
+  </data>
+  <data name="FaildToAddUser" xml:space="preserve">
+    <value>Faild To Add User</value>
+  </data>
 </root>

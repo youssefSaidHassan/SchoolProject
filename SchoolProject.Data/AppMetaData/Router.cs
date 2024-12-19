@@ -31,6 +31,19 @@
 
 
         }
+        public static class UserRoting
+        {
+            public const string Prefix = $"{rule}User/";
+            public const string List = $"{Prefix}List";
+            public const string Paginated = $"{Prefix}Paginated";
+            public const string GetById = $"{Prefix}Id";
+            public const string Create = $"{Prefix}Create";
+            public const string Edit = $"{Prefix}Edit";
+            public const string Delete = $"{Prefix}Delete/{{id}}";
+
+
+
+        }
 
     }
 }

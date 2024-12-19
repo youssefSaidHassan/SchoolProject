@@ -132,11 +132,23 @@
   <data name="DepartmentId" xml:space="preserve">
     <value>رقم القسم </value>
   </data>
+  <data name="EmailAddress" xml:space="preserve">
+    <value>عنوان البريد الإلكترونى غير صحيح</value>
+  </data>
+  <data name="EmailIsExist" xml:space="preserve">
+    <value>هذا البريد الإلكتروني موجود سابقاً</value>
+  </data>
   <data name="Exist" xml:space="preserve">
     <value>موجود سابقاً</value>
   </data>
+  <data name="FaildToAddUser" xml:space="preserve">
+    <value>حدث خطأ أثناء إضافة المستخدم</value>
+  </data>
   <data name="MaximumLength10" xml:space="preserve">
     <value>لا يمكن ان يكون اكثر من 10 حروف</value>
+  </data>
+  <data name="MaximumLength50" xml:space="preserve">
+    <value>لا يمكن أن يكون أكثر من 50 حرف</value>
   </data>
   <data name="Name" xml:space="preserve">
     <value>الأسم</value>
@@ -149,6 +161,9 @@
   </data>
   <data name="NotFound" xml:space="preserve">
     <value>غير متوفر</value>
+  </data>
+  <data name="PasswordNotMatches" xml:space="preserve">
+    <value>كلمة السر غير متطابقة</value>
   </data>
   <data name="Phone" xml:space="preserve">
     <value>الهاتف</value>

@@ -23,7 +23,11 @@
   <ItemGroup>
     <Folder Include="Features\Departments\Commands\" />
     <Folder Include="Features\Students\Commands\Responses\" />
+    <Folder Include="Features\Users\Queires\Handlers\" />
+    <Folder Include="Features\Users\Queires\Models\" />
+    <Folder Include="Features\Users\Queires\" />
     <Folder Include="Mapping\DepartmentsMapping\CommandMapping\" />
+    <Folder Include="Mapping\UserMapping\QueryMapping\" />
   </ItemGroup>
 
   <ItemGroup>
