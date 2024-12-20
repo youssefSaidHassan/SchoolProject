@@ -10,7 +10,8 @@ using SchoolProject.Data.Entities.Identity;
 namespace SchoolProject.Core.Features.Users.Commands.Handlers
 {
     public class UserCommandHandler : ResponseHandler,
-         IRequestHandler<AddUserCommand, Response<string>>
+         IRequestHandler<AddUserCommand, Response<string>>,
+         IRequestHandler<EditUserCommand, Response<string>>
     {
         #region fields
         private readonly IStringLocalizer<SharedResources> _stringLocalizer;
@@ -41,15 +42,33 @@ namespace SchoolProject.Core.Features.Users.Commands.Handlers
                 return BadRequest<string>(_stringLocalizer[SharedResourcesKeys.EmailIsExist]);
             }
             // mapper 
-            var userMapping = _mapper.Map<User>(request);
+            var userMapper = _mapper.Map<User>(request);
             // register user 
-            var result = await _userManager.CreateAsync(userMapping, request.Password);
+            var result = await _userManager.CreateAsync(userMapper, request.Password);
             //return response
             if (result.Succeeded)
             {
                 return Created("");
             }
-            return BadRequest<string>(_stringLocalizer[SharedResourcesKeys.FaildToAddUser]);
+            return BadRequest<string>(_stringLocalizer[SharedResourcesKeys.FailedToAddUser]);
+        }
+
+        public async Task<Response<string>> Handle(EditUserCommand request, CancellationToken cancellationToken)
+        {
+            var user = await _userManager.FindByIdAsync(request.Id);
+            if (user == null)
+            {
+                return NotFound<string>(_stringLocalizer[SharedResourcesKeys.NotFound]);
+            }
+            var userMapper = _mapper.Map(request, user);
+
+            var result = await _userManager.UpdateAsync(userMapper);
+            if (result.Succeeded)
+            {
+                return Success<string>(_stringLocalizer[SharedResourcesKeys.Updated]);
+            }
+            return BadRequest<string>(_stringLocalizer[SharedResourcesKeys.UpdateFailed]);
+
         }
         #endregion
     }

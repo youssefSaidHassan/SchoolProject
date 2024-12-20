@@ -59,7 +59,7 @@ namespace SchoolProject.Core.Bases
             {
                 StatusCode = System.Net.HttpStatusCode.UnprocessableEntity,
                 Succeeded = false,
-                Message = Message == null ? _stringLocalizer[SharedResourcesKeys.UnprocessableEntity] : Message
+                Message = Message == null ? _stringLocalizer[SharedResourcesKeys.UnpossessableEntity] : Message
             };
         }
 
