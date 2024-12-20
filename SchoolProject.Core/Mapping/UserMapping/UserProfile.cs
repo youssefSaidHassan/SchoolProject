@@ -8,6 +8,7 @@ namespace SchoolProject.Core.Mapping.UserMapping
         {
             AddUserMapping();
             UserMapping();
+            EditUserMapping();
         }
     }
 }

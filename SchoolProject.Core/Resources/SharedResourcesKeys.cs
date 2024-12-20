@@ -15,13 +15,14 @@
         public const string Exist = "Exist";
         public const string Unauthorized = "Unauthorized";
         public const string BadRequest = "BadRequest";
-        public const string UnprocessableEntity = "UnprocessableEntity";
+        public const string UnpossessableEntity = "UnpossessableEntity";
         public const string NotExist = "NotExist";
         public const string DepartmentId = "DepartmentId";
         public const string PasswordNotMatches = "PasswordNotMatches";
         public const string EmailAddress = "EmailAddress";
         public const string EmailIsExist = "EmailIsExist";
-        public const string FaildToAddUser = "FaildToAddUser";
+        public const string FailedToAddUser = "FailedToAddUser";
+        public const string UpdateFailed = "UpdateFailed";
 
     }
 }

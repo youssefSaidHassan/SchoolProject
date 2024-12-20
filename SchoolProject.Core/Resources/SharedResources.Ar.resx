@@ -141,7 +141,7 @@
   <data name="Exist" xml:space="preserve">
     <value>موجود سابقاً</value>
   </data>
-  <data name="FaildToAddUser" xml:space="preserve">
+  <data name="FailedToAddUser" xml:space="preserve">
     <value>حدث خطأ أثناء إضافة المستخدم</value>
   </data>
   <data name="MaximumLength10" xml:space="preserve">
@@ -180,10 +180,13 @@
   <data name="Unauthorized" xml:space="preserve">
     <value>لا تمتلك الصلاحية للوصول لتلك المصادر</value>
   </data>
-  <data name="UnprocessableEntity" xml:space="preserve">
+  <data name="UnpossessableEntity" xml:space="preserve">
     <value>يوجد مشاكل في صيغة الداتا او نوعها المطلوب </value>
   </data>
   <data name="Updated" xml:space="preserve">
     <value>تم التعديل بنجاح </value>
+  </data>
+  <data name="UpdateFailed" xml:space="preserve">
+    <value>حدث خطأ أثناء عملية تحديث البيانات </value>
   </data>
 </root>

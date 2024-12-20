@@ -165,7 +165,10 @@
   <data name="EmailIsExist" xml:space="preserve">
     <value>This Email Address Is Already Exist</value>
   </data>
-  <data name="FaildToAddUser" xml:space="preserve">
+  <data name="FailedToAddUser" xml:space="preserve">
     <value>Faild To Add User</value>
+  </data>
+  <data name="UpdateFailed" xml:space="preserve">
+    <value>Update Operation Failed</value>
   </data>
 </root>
