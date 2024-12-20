@@ -12,6 +12,7 @@ namespace SchoolProject.Core.Features.Users.Commands.Handlers
     public class UserCommandHandler : ResponseHandler,
          IRequestHandler<AddUserCommand, Response<string>>,
          IRequestHandler<DeleteUserCommand, Response<string>>,
+         IRequestHandler<ChangeUserPasswordCommand, Response<string>>,
          IRequestHandler<EditUserCommand, Response<string>>
     {
         #region fields
@@ -79,6 +80,19 @@ namespace SchoolProject.Core.Features.Users.Commands.Handlers
             var result = await _userManager.DeleteAsync(user);
             if (result.Succeeded) return Deleted<string>();
             return BadRequest<string>(_stringLocalizer[SharedResourcesKeys.DeleteFailed]);
+        }
+
+        public async Task<Response<string>> Handle(ChangeUserPasswordCommand request, CancellationToken cancellationToken)
+        {
+            // Get User 
+            var user = await _userManager.FindByIdAsync(request.UserId);
+            if (user == null) return NotFound<string>(_stringLocalizer[SharedResourcesKeys.NotFound]);
+
+            var result = await _userManager.ChangePasswordAsync(user, request.CurrentPassword, request.NewPassword);
+
+            if (result.Succeeded) return Success<string>(_stringLocalizer[SharedResourcesKeys.Updated]);
+
+            return BadRequest<string>(_stringLocalizer[SharedResourcesKeys.UpdateFailed]);
         }
         #endregion
     }
