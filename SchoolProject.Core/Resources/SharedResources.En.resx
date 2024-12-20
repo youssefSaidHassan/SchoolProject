@@ -123,10 +123,16 @@
   <data name="Deleted" xml:space="preserve">
     <value>Deleted Successfully</value>
   </data>
+  <data name="DepartmentId" xml:space="preserve">
+    <value>Department Id</value>
+  </data>
+  <data name="NotExist" xml:space="preserve">
+    <value> Is Not Exist</value>
+  </data>
   <data name="Exist" xml:space="preserve">
     <value>Already Exist</value>
   </data>
-  <data name="MaximumLength10MaximumLength10" xml:space="preserve">
+  <data name="MaximumLength10" xml:space="preserve">
     <value>lenght must be less than 10</value>
   </data>
   <data name="NotEmpty" xml:space="preserve">
@@ -146,5 +152,20 @@
   </data>
   <data name="Updated" xml:space="preserve">
     <value>Updated Successfully</value>
+  </data>
+  <data name="MaximumLength50" xml:space="preserve">
+    <value>Length must not be bigger than 50</value>
+  </data>
+  <data name="PasswordNotMatches" xml:space="preserve">
+    <value>Password Not Matches</value>
+  </data>
+  <data name="EmailAddress" xml:space="preserve">
+    <value>In Valid Email Address</value>
+  </data>
+  <data name="EmailIsExist" xml:space="preserve">
+    <value>This Email Address Is Already Exist</value>
+  </data>
+  <data name="FaildToAddUser" xml:space="preserve">
+    <value>Faild To Add User</value>
   </data>
 </root>

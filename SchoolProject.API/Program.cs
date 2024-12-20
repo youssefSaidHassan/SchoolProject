@@ -1,4 +1,3 @@
-
 using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
@@ -33,9 +32,11 @@ namespace SchoolProject.API
 
             #region Dependacy Injection
 
-            builder.Services.AddInfrastructureDependencies();
-            builder.Services.AddServiceDependencies();
-            builder.Services.AddCoreDependencies();
+            builder.Services.AddInfrastructureDependencies()
+                             .AddServiceDependencies()
+                             .AddCoreDependencies()
+                             .AddServiceRegistration();
+
 
             #endregion
 
@@ -102,8 +103,6 @@ namespace SchoolProject.API
             app.UseHttpsRedirection();
             app.UseCors(CORS);
             app.UseAuthorization();
-
-
             app.MapControllers();
 
             app.Run();

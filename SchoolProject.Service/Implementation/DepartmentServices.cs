@@ -30,6 +30,13 @@ namespace SchoolProject.Service.Implementation
             return department;
 
         }
+
+        public async Task<bool> IsDepartmentIdExist(int id)
+        {
+            var department = await _departmentRepository.GetByIdAsync(id);
+
+            return department != null;
+        }
         #endregion
     }
 }
