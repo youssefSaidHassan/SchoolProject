@@ -23,6 +23,7 @@
         public const string EmailIsExist = "EmailIsExist";
         public const string FailedToAddUser = "FailedToAddUser";
         public const string UpdateFailed = "UpdateFailed";
+        public const string DeleteFailed = "DeleteFailed";
 
     }
 }
