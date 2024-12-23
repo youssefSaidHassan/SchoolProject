@@ -171,4 +171,13 @@
   <data name="UpdateFailed" xml:space="preserve">
     <value>Update Operation Failed</value>
   </data>
+  <data name="UserName" xml:space="preserve">
+    <value>User Name</value>
+  </data>
+  <data name="UserNameNotExist" xml:space="preserve">
+    <value>UserName Not Exist</value>
+  </data>
+  <data name="SignInFailed" xml:space="preserve">
+    <value>Invalid User UserName Or Password are not Correct</value>
+  </data>
 </root>

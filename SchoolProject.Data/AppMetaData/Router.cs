@@ -41,8 +41,11 @@
             public const string Create = $"{Prefix}Create";
             public const string Edit = $"{Prefix}Edit";
             public const string Delete = $"{Prefix}Delete/{{id}}";
-
-
+        }
+        public static class AuthenticationRouting
+        {
+            public const string Prefix = $"{rule}Auth/";
+            public const string SignIn = $"{Prefix}SignIn";
 
         }
 
