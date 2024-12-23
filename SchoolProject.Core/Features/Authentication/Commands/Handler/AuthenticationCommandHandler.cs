@@ -11,7 +11,8 @@ using SchoolProject.Service.Abstracts;
 namespace SchoolProject.Core.Features.Authentication.Commands.Handler
 {
     public class AuthenticationCommandHandler : ResponseHandler,
-    IRequestHandler<SingInCommand, Response<JwtAuthResponse>>
+    IRequestHandler<SingInCommand, Response<JwtAuthResponse>>,
+    IRequestHandler<RefreshTokenCommand, Response<JwtAuthResponse>>
     {
         #region Fileds
         private readonly IStringLocalizer<SharedResources> _stringLocalizer;
@@ -57,6 +58,13 @@ namespace SchoolProject.Core.Features.Authentication.Commands.Handler
             }
             return BadRequest<JwtAuthResponse>(_stringLocalizer[SharedResourcesKeys.SignInFailed]);
             //generate token
+        }
+
+        public async Task<Response<JwtAuthResponse>> Handle(RefreshTokenCommand request, CancellationToken cancellationToken)
+        {
+            var result = await _authenticationService.GetRefreshToken(request.AccessToken, request.RefreshToken);
+
+            return Success(result);
         }
         #endregion
     }

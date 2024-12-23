@@ -46,6 +46,8 @@
         {
             public const string Prefix = $"{rule}Auth/";
             public const string SignIn = $"{Prefix}SignIn";
+            public const string RefreshToken = $"{Prefix}RefreshToken";
+            public const string ValidateToken = $"{Prefix}ValidateToken";
 
         }
 

@@ -22,7 +22,6 @@
 
   <ItemGroup>
     <Folder Include="Features\Authentication\Commands\Responses\" />
-    <Folder Include="Features\Authentication\Queries\" />
     <Folder Include="Features\Departments\Commands\" />
     <Folder Include="Features\Students\Commands\Responses\" />
     <Folder Include="Mapping\DepartmentsMapping\CommandMapping\" />
