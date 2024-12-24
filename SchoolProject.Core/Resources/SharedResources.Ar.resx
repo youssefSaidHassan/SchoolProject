@@ -120,6 +120,9 @@
   <data name="Address" xml:space="preserve">
     <value>العنوان</value>
   </data>
+  <data name="AlgorithmIsWrong" xml:space="preserve">
+    <value>هناك خطأ في الخوارزمية المستخدمة</value>
+  </data>
   <data name="BadRequest" xml:space="preserve">
     <value>هذا الطلب لا يمكن فهمه</value>
   </data>
@@ -174,6 +177,12 @@
   <data name="PhonePattern" xml:space="preserve">
     <value>رقم الهاتف غير صحيح</value>
   </data>
+  <data name="RefreshTokenIsNotExpired" xml:space="preserve">
+    <value>رمز التنشيط الذى تستخده إنتهت صلاحيته</value>
+  </data>
+  <data name="RefreshTokenIsNotFound" xml:space="preserve">
+    <value>رمز التنشيط الذى تستخدمه ليس موجود </value>
+  </data>
   <data name="Required" xml:space="preserve">
     <value>هذا الحقل مطلوب </value>
   </data>
@@ -182,6 +191,12 @@
   </data>
   <data name="Success" xml:space="preserve">
     <value>تمت العملية بنجاح </value>
+  </data>
+  <data name="TokenIsExpired" xml:space="preserve">
+    <value>رمز الوصول الذي تستخدمه منتهى الصلاحية </value>
+  </data>
+  <data name="TokenIsNotExpired" xml:space="preserve">
+    <value>رمز الوصول الذي تستخدمه ليس منتهى</value>
   </data>
   <data name="Unauthorized" xml:space="preserve">
     <value>لا تمتلك الصلاحية للوصول لتلك المصادر</value>
