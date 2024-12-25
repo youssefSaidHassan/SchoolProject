@@ -39,9 +39,9 @@ namespace SchoolProject.Service.Implementation
         #region Handel Functions
         public async Task<JwtAuthResponse> GetJWTToken(User user)
         {
+            var roles = await _userManager.GetRolesAsync(user);
 
-
-            var (token, accessToken) = GenerateJwtToken(user);
+            var (token, accessToken) = await GenerateJwtToken(user);
 
             var refreshToken = GetRefreshToken(user.UserName);
 
@@ -65,15 +65,19 @@ namespace SchoolProject.Service.Implementation
             };
             return response;
         }
-        private List<Claim> GetClaims(User user)
+        private List<Claim> GetClaims(User user, List<string> roles)
         {
             var claims = new List<Claim>()
-          {
-                new Claim(nameof(UserClaimModel.UserName), user.UserName),
-                new Claim(nameof(UserClaimModel.Email), user.Email),
+            {
+                new Claim(ClaimTypes.NameIdentifier, user.UserName),
+                new Claim(ClaimTypes.Email, user.Email),
                 new Claim(nameof(UserClaimModel.PhoneNumber), user.PhoneNumber),
                 new Claim(nameof(UserClaimModel.UserId), user.Id)
-          };
+            };
+            foreach (var role in roles)
+            {
+                claims.Add(new Claim(ClaimTypes.Role, role));
+            }
             return claims;
         }
         private RefreshToken GetRefreshToken(string userName)
@@ -104,7 +108,7 @@ namespace SchoolProject.Service.Implementation
 
             //Generate RefreshToken
 
-            var (jwtSecurityToken, newToken) = GenerateJwtToken(user);
+            var (jwtSecurityToken, newToken) = await GenerateJwtToken(user);
             var userRefreshToken = await _refreshTokenRepository.GetTableNoTracking()
               .FirstOrDefaultAsync(x => x.Token == accessToken &&
               x.RefreshToken == refreshToken &&
@@ -128,9 +132,10 @@ namespace SchoolProject.Service.Implementation
             var response = handler.ReadJwtToken(accessToken);
             return response;
         }
-        private (JwtSecurityToken, string) GenerateJwtToken(User user)
+        private async Task<(JwtSecurityToken, string)> GenerateJwtToken(User user)
         {
-            var claims = GetClaims(user);
+            var roles = await _userManager.GetRolesAsync(user);
+            var claims = GetClaims(user, roles.ToList());
             var token = new JwtSecurityToken(
                 _jwtSettings.Issuer,
                 _jwtSettings.Audience,

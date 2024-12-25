@@ -8,7 +8,8 @@ using SchoolProject.Service.Abstracts;
 namespace SchoolProject.Core.Features.Authorization.Command.Handler
 {
     public class RoleCommandHandler : ResponseHandler,
-        IRequestHandler<AddRoleCommand, Response<string>>
+        IRequestHandler<AddRoleCommand, Response<string>>,
+        IRequestHandler<EditRoleCommand, Response<string>>
     {
 
         #region Fields
@@ -41,6 +42,17 @@ namespace SchoolProject.Core.Features.Authorization.Command.Handler
             {
                 return BadRequest<string>(_stringLocalizer[SharedResourcesKeys.AddFailed]);
             }
+        }
+
+        public async Task<Response<string>> Handle(EditRoleCommand request, CancellationToken cancellationToken)
+        {
+            var result = await _authorizationService.EditRoleAsync(request);
+            if (result == "NotFound")
+                return NotFound<string>();
+            else if (result == "Success")
+                return Success<string>(_stringLocalizer[SharedResourcesKeys.Updated]);
+            else
+                return BadRequest<string>(result);
         }
         #endregion
     }

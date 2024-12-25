@@ -51,7 +51,6 @@ namespace SchoolProject.Core.Features.Authentication.Commands.Handler
 
             if (result.Succeeded)
             {
-
                 var token = await _authenticationService.GetJWTToken(user);
                 // return token
                 return Success(token);

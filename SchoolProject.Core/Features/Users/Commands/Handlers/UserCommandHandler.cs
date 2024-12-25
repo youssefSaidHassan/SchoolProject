@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
 using SchoolProject.Core.Bases;
 using SchoolProject.Core.Features.Users.Commands.Models;
@@ -51,14 +50,9 @@ namespace SchoolProject.Core.Features.Users.Commands.Handlers
             {
                 return BadRequest<string>(_stringLocalizer[SharedResourcesKeys.FailedToAddUser]);
             }
-            var users = await _userManager.Users.ToListAsync();
-            if (users.Count > 0) {
-                await _userManager.AddToRoleAsync(user, "User");
-            } else
-            {
-                await _userManager.AddToRoleAsync(user, "Admin");
+            await _userManager.AddToRoleAsync(userMapper, "User");
 
-            }
+
             return Created("");
         }
 
