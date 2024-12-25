@@ -34,7 +34,7 @@ namespace SchoolProject.Infrastructure
                 options.Lockout.AllowedForNewUsers = true;
 
                 // User Settings
-                options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+                options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789._@+";
                 options.User.RequireUniqueEmail = true;
 
             })

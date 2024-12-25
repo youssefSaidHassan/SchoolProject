@@ -34,5 +34,7 @@
         public const string RefreshTokenIsNotExpired = "RefreshTokenIsNotExpired";
         public const string TokenIsExpired = "TokenIsExpired";
 
+        public const string AddFailed = "AddFailed";
+
     }
 }

@@ -135,7 +135,7 @@ namespace SchoolProject.Service.Implementation
                 _jwtSettings.Issuer,
                 _jwtSettings.Audience,
                 claims,
-                expires: DateTime.UtcNow.AddSeconds(_jwtSettings.AccessTokenExpireDate),
+                expires: DateTime.UtcNow.AddDays(_jwtSettings.AccessTokenExpireDate),
                 signingCredentials: new SigningCredentials(
                   new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_jwtSettings.Secret)),
                   SecurityAlgorithms.HmacSha256Signature

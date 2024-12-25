@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
 using SchoolProject.Core.Bases;
 using SchoolProject.Core.Features.Users.Commands.Models;
@@ -46,11 +47,19 @@ namespace SchoolProject.Core.Features.Users.Commands.Handlers
             // register user 
             var result = await _userManager.CreateAsync(userMapper, request.Password);
             //return response
-            if (result.Succeeded)
+            if (!result.Succeeded)
             {
-                return Created("");
+                return BadRequest<string>(_stringLocalizer[SharedResourcesKeys.FailedToAddUser]);
             }
-            return BadRequest<string>(_stringLocalizer[SharedResourcesKeys.FailedToAddUser]);
+            var users = await _userManager.Users.ToListAsync();
+            if (users.Count > 0) {
+                await _userManager.AddToRoleAsync(user, "User");
+            } else
+            {
+                await _userManager.AddToRoleAsync(user, "Admin");
+
+            }
+            return Created("");
         }
 
         public async Task<Response<string>> Handle(EditUserCommand request, CancellationToken cancellationToken)

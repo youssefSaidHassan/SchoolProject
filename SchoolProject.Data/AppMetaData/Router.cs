@@ -44,8 +44,16 @@
         }
         public static class AuthenticationRouting
         {
-            public const string Prefix = $"{rule}Auth/";
+            public const string Prefix = $"{rule}Authentication/";
             public const string SignIn = $"{Prefix}SignIn";
+            public const string RefreshToken = $"{Prefix}RefreshToken";
+            public const string ValidateToken = $"{Prefix}ValidateToken";
+
+        }
+        public static class AuthorizationRouting
+        {
+            public const string Prefix = $"{rule}Authorization/";
+            public const string CreateRole = $"{Prefix}Role/Create";
             public const string RefreshToken = $"{Prefix}RefreshToken";
             public const string ValidateToken = $"{Prefix}ValidateToken";
 
