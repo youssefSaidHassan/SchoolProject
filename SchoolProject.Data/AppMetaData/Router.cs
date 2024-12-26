@@ -55,9 +55,9 @@
             public const string Prefix = $"{rule}Authorization/";
             public const string CreateRole = $"{Prefix}Role/Create";
             public const string DeleteRole = $"{Prefix}Role/Delete/{{id}}";
-            public const string Editole = $"{Prefix}Role/Edit";
-            public const string RefreshToken = $"{Prefix}RefreshToken";
-            public const string ValidateToken = $"{Prefix}ValidateToken";
+            public const string EditRole = $"{Prefix}Role/Edit";
+            public const string GetAll = $"{Prefix}GetAll";
+            public const string GetById = $"{Prefix}GetById/{{id}}";
 
         }
 

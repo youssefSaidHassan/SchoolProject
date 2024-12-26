@@ -1,4 +1,5 @@
-﻿using SchoolProject.Data.DTOs;
+﻿using Microsoft.AspNetCore.Identity;
+using SchoolProject.Data.DTOs;
 
 namespace SchoolProject.Service.Abstracts
 {
@@ -9,5 +10,7 @@ namespace SchoolProject.Service.Abstracts
         public Task<string> EditRoleAsync(EditRoleRequest request);
         public Task<bool> IsRoleExistByName(string roleName);
         public Task<bool> IsRoleExistById(string roleId);
+        public Task<List<IdentityRole>> GetRoleListAsync();
+        public Task<IdentityRole> GetRoleByIdAsync(string id);
     }
 }

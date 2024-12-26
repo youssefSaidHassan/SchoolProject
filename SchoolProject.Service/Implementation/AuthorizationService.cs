@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using SchoolProject.Data.DTOs;
 using SchoolProject.Data.Entities.Identity;
 using SchoolProject.Service.Abstracts;
@@ -86,6 +87,17 @@ namespace SchoolProject.Service.Implementation
 
             var errors = string.Join("-", result.Errors);
             return errors;
+        }
+
+        public async Task<List<IdentityRole>> GetRoleListAsync()
+        {
+            return await _roleManager.Roles.ToListAsync();
+
+        }
+
+        public async Task<IdentityRole> GetRoleByIdAsync(string id)
+        {
+            return await _roleManager.FindByIdAsync(id);
         }
 
 
