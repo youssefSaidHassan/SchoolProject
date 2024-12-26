@@ -189,6 +189,9 @@
   <data name="Required" xml:space="preserve">
     <value>هذا الحقل مطلوب </value>
   </data>
+  <data name="RoleIsUsed" xml:space="preserve">
+    <value>هذه الصلاحية مستخدمة ولايمكن حذفها</value>
+  </data>
   <data name="SignInFailed" xml:space="preserve">
     <value>إسم المستخدم  خطأ أو كلمة المرور غير صحيحة  </value>
   </data>

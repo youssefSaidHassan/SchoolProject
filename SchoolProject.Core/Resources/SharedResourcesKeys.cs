@@ -35,6 +35,7 @@
         public const string TokenIsExpired = "TokenIsExpired";
 
         public const string AddFailed = "AddFailed";
+        public const string RoleIsUsed = "RoleIsUsed";
 
     }
 }

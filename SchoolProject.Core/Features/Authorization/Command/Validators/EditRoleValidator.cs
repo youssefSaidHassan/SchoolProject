@@ -4,7 +4,7 @@ using SchoolProject.Core.Features.Authorization.Command.Models;
 using SchoolProject.Core.Resources;
 using SchoolProject.Service.Abstracts;
 
-namespace SchoolProject.Core.Features.Authorization.Command.Validatiors
+namespace SchoolProject.Core.Features.Authorization.Command.Validators
 {
     public class EditRoleValidator : AbstractValidator<EditRoleCommand>
     {
@@ -40,7 +40,7 @@ namespace SchoolProject.Core.Features.Authorization.Command.Validatiors
         private void AppleyCustomValidationRules()
         {
             RuleFor(x => x.Name)
-                .MustAsync(async (Key, CancellationToken) => !await _authorizationService.IsRoleExist(Key))
+                .MustAsync(async (Key, CancellationToken) => !await _authorizationService.IsRoleExistByName(Key))
                 .WithMessage(_stringLocalizer[SharedResourcesKeys.Exist]);
         }
         #endregion

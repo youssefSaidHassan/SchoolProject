@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using SchoolProject.Data.DTOs;
+using SchoolProject.Data.Entities.Identity;
 using SchoolProject.Service.Abstracts;
 
 namespace SchoolProject.Service.Implementation
@@ -8,13 +9,16 @@ namespace SchoolProject.Service.Implementation
     {
         #region Fields
         private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly UserManager<User> _userManager;
 
         #endregion
 
         #region Constructor
-        public AuthorizationService(RoleManager<IdentityRole> roleManager)
+        public AuthorizationService(RoleManager<IdentityRole> roleManager,
+            UserManager<User> userManager)
         {
             _roleManager = roleManager;
+            _userManager = userManager;
         }
 
         #endregion
@@ -33,7 +37,7 @@ namespace SchoolProject.Service.Implementation
 
 
 
-        public async Task<bool> IsRoleExist(string roleName)
+        public async Task<bool> IsRoleExistByName(string roleName)
         {
             var role = await _roleManager.FindByNameAsync(roleName);
             if (role == null)
@@ -59,6 +63,31 @@ namespace SchoolProject.Service.Implementation
             var errors = string.Join("-", result.Errors);
             return errors;
         }
+
+        public async Task<bool> IsRoleExistById(string roleId)
+        {
+            var role = await _roleManager.FindByIdAsync(roleId);
+            if (role == null)
+            {
+                return false;
+            }
+            return true;
+        }
+        public async Task<string> DeleteRoleAsync(string roleId)
+        {
+            var role = await _roleManager.FindByIdAsync(roleId);
+            var users = await _userManager.GetUsersInRoleAsync(role.Name);
+
+            if (users.Any()) return "Used";
+
+            var result = await _roleManager.DeleteAsync(role);
+
+            if (result.Succeeded) return "Success";
+
+            var errors = string.Join("-", result.Errors);
+            return errors;
+        }
+
 
         #endregion
     }
