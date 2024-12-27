@@ -38,9 +38,22 @@ namespace SchoolProject.API.Controllers
             return NewResult(response);
         }
         [HttpGet(Router.AuthorizationRouting.GetById)]
-        public async Task<IActionResult> GetRoleById(string id)
+        public async Task<IActionResult> GetRoleById([FromRoute] string id)
         {
             var response = await _mediator.Send(new GetRoleByIdQuery(id));
+            return NewResult(response);
+        }
+
+        [HttpGet(Router.AuthorizationRouting.MangeUserRoles)]
+        public async Task<IActionResult> MangeUserRoles([FromRoute] string userId)
+        {
+            var response = await _mediator.Send(new MangeUserRolesQuery(userId));
+            return NewResult(response);
+        }
+        [HttpPut(Router.AuthorizationRouting.UpdateUserRoles)]
+        public async Task<IActionResult> UpdateUserRoles([FromBody] UpdateUserRolesCommand command)
+        {
+            var response = await _mediator.Send(command);
             return NewResult(response);
         }
     }
