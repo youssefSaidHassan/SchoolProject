@@ -34,7 +34,7 @@ namespace SchoolProject.Infrastructure
                 options.Lockout.AllowedForNewUsers = true;
 
                 // User Settings
-                options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+                options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789._@+";
                 options.User.RequireUniqueEmail = true;
 
             })
@@ -111,6 +111,21 @@ namespace SchoolProject.Infrastructure
                 });
             });
 
+
+            services.AddAuthorization(option =>
+            {
+                option.AddPolicy("CreateStudent", policy =>
+                {
+                    policy.RequireClaim("Create Student", "True");
+                });
+                option.AddPolicy("EditStudent", policy =>
+                {
+                    policy.RequireClaim("Edit Student", "True");
+                }); option.AddPolicy("DeleteStudent", policy =>
+                {
+                    policy.RequireClaim("Delete Student", "True");
+                });
+            });
 
             return services;
         }

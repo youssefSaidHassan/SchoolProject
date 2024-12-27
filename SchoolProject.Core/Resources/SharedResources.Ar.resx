@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AddFailed" xml:space="preserve">
+    <value>حدث خطأ أثناء عملية الأضافة</value>
+  </data>
   <data name="Address" xml:space="preserve">
     <value>العنوان</value>
   </data>
@@ -185,6 +188,9 @@
   </data>
   <data name="Required" xml:space="preserve">
     <value>هذا الحقل مطلوب </value>
+  </data>
+  <data name="RoleIsUsed" xml:space="preserve">
+    <value>هذه الصلاحية مستخدمة ولايمكن حذفها</value>
   </data>
   <data name="SignInFailed" xml:space="preserve">
     <value>إسم المستخدم  خطأ أو كلمة المرور غير صحيحة  </value>

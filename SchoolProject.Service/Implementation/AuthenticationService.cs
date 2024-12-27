@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using SchoolProject.Data.Entities.Identity;
 using SchoolProject.Data.Helpers;
+using SchoolProject.Data.Responses;
 using SchoolProject.Infrastructure.Abstract;
 using SchoolProject.Service.Abstracts;
 using System.IdentityModel.Tokens.Jwt;
@@ -41,7 +42,7 @@ namespace SchoolProject.Service.Implementation
         {
 
 
-            var (token, accessToken) = GenerateJwtToken(user);
+            var (token, accessToken) = await GenerateJwtToken(user);
 
             var refreshToken = GetRefreshToken(user.UserName);
 
@@ -65,15 +66,22 @@ namespace SchoolProject.Service.Implementation
             };
             return response;
         }
-        private List<Claim> GetClaims(User user)
+        private async Task<List<Claim>> GetClaimsAsync(User user)
         {
+            var roles = await _userManager.GetRolesAsync(user);
+            var userClaims = await _userManager.GetClaimsAsync(user);
             var claims = new List<Claim>()
-          {
-                new Claim(nameof(UserClaimModel.UserName), user.UserName),
-                new Claim(nameof(UserClaimModel.Email), user.Email),
+            {
+                new Claim(ClaimTypes.NameIdentifier, user.UserName),
+                new Claim(ClaimTypes.Email, user.Email),
                 new Claim(nameof(UserClaimModel.PhoneNumber), user.PhoneNumber),
                 new Claim(nameof(UserClaimModel.UserId), user.Id)
-          };
+            };
+            claims.AddRange(userClaims);
+            foreach (var role in roles)
+            {
+                claims.Add(new Claim(ClaimTypes.Role, role));
+            }
             return claims;
         }
         private RefreshToken GetRefreshToken(string userName)
@@ -104,7 +112,7 @@ namespace SchoolProject.Service.Implementation
 
             //Generate RefreshToken
 
-            var (jwtSecurityToken, newToken) = GenerateJwtToken(user);
+            var (jwtSecurityToken, newToken) = await GenerateJwtToken(user);
             var userRefreshToken = await _refreshTokenRepository.GetTableNoTracking()
               .FirstOrDefaultAsync(x => x.Token == accessToken &&
               x.RefreshToken == refreshToken &&
@@ -128,14 +136,15 @@ namespace SchoolProject.Service.Implementation
             var response = handler.ReadJwtToken(accessToken);
             return response;
         }
-        private (JwtSecurityToken, string) GenerateJwtToken(User user)
+        private async Task<(JwtSecurityToken, string)> GenerateJwtToken(User user)
         {
-            var claims = GetClaims(user);
+            var roles = await _userManager.GetRolesAsync(user);
+            var claims = await GetClaimsAsync(user);
             var token = new JwtSecurityToken(
                 _jwtSettings.Issuer,
                 _jwtSettings.Audience,
                 claims,
-                expires: DateTime.UtcNow.AddSeconds(_jwtSettings.AccessTokenExpireDate),
+                expires: DateTime.UtcNow.AddDays(_jwtSettings.AccessTokenExpireDate),
                 signingCredentials: new SigningCredentials(
                   new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_jwtSettings.Secret)),
                   SecurityAlgorithms.HmacSha256Signature

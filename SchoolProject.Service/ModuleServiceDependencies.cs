@@ -11,6 +11,7 @@ namespace SchoolProject.Service
             services.AddScoped<IStudentService, StudentService>();
             services.AddScoped<IDepartmentServices, DepartmentServices>();
             services.AddScoped<IAuthenticationService, AuthenticationService>();
+            services.AddScoped<IAuthorizationService, AuthorizationService>();
 
             return services;
         }

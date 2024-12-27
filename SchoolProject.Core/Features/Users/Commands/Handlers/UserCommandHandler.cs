@@ -46,11 +46,14 @@ namespace SchoolProject.Core.Features.Users.Commands.Handlers
             // register user 
             var result = await _userManager.CreateAsync(userMapper, request.Password);
             //return response
-            if (result.Succeeded)
+            if (!result.Succeeded)
             {
-                return Created("");
+                return BadRequest<string>(_stringLocalizer[SharedResourcesKeys.FailedToAddUser]);
             }
-            return BadRequest<string>(_stringLocalizer[SharedResourcesKeys.FailedToAddUser]);
+            await _userManager.AddToRoleAsync(userMapper, "User");
+
+
+            return Created("");
         }
 
         public async Task<Response<string>> Handle(EditUserCommand request, CancellationToken cancellationToken)
