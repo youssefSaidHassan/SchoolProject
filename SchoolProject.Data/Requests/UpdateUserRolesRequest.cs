@@ -1,4 +1,6 @@
-﻿namespace SchoolProject.Data.DTOs
+﻿using SchoolProject.Data.Responses;
+
+namespace SchoolProject.Data.Requests
 {
     public class UpdateUserRolesRequest : MangeUserRolesResponse
     {

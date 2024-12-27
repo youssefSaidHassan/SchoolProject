@@ -1,4 +1,4 @@
-﻿namespace SchoolProject.Data.DTOs
+﻿namespace SchoolProject.Data.Responses
 {
     public class MangeUserRolesResponse
     {

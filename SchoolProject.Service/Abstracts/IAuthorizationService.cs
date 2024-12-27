@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using SchoolProject.Data.DTOs;
 using SchoolProject.Data.Entities.Identity;
+using SchoolProject.Data.Requests;
+using SchoolProject.Data.Responses;
 
 namespace SchoolProject.Service.Abstracts
 {
@@ -15,5 +16,7 @@ namespace SchoolProject.Service.Abstracts
         public Task<IdentityRole> GetRoleByIdAsync(string id);
         public Task<MangeUserRolesResponse> GetMangeUserRolesData(User user);
         public Task<string> UpdateUserRoles(UpdateUserRolesRequest request);
+        public Task<string> UpdateUserClaims(UpdateUserClaimsRequest request);
+        public Task<MangeUserClaimsResponse> GetMangeUserClaimData(User user);
     }
 }
