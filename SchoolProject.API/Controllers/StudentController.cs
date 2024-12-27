@@ -9,7 +9,7 @@ namespace SchoolProject.API.Controllers
 {
 
     [ApiController]
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class StudentController : AppControllerBase
     {
 
@@ -34,13 +34,14 @@ namespace SchoolProject.API.Controllers
             var response = await _mediator.Send(new GetStudentByIDQuery(id));
             return NewResult(response);
         }
-
+        [Authorize(Policy = "CreateStudent")]
         [HttpPost(Router.StudentRouting.Create)]
         public async Task<IActionResult> Create([FromBody] AddStudentCommand command)
         {
             var response = await _mediator.Send(command);
             return NewResult(response);
         }
+        [Authorize(Policy = "EditStudent")]
 
         [HttpPut(Router.StudentRouting.Edit)]
         public async Task<IActionResult> Edit([FromBody] EditStudentCommand command)
@@ -48,6 +49,7 @@ namespace SchoolProject.API.Controllers
             var response = await _mediator.Send(command);
             return NewResult(response);
         }
+        [Authorize(Policy = "DeleteStudent")]
         [HttpDelete(Router.StudentRouting.Delete)]
         public async Task<IActionResult> Delete([FromRoute] int id)
         {

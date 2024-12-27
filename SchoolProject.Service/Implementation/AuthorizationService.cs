@@ -118,7 +118,7 @@ namespace SchoolProject.Service.Implementation
             foreach (var item in roles)
             {
                 var role = new UserRoles();
-                role.HasRole = userRoles.Contains(item.Name);
+                role.HasRole = await _userManager.IsInRoleAsync(user, item.Name);
                 role.RoleName = item.Name;
                 role.RoleId = item.Id;
                 response.Roles.Add(role);

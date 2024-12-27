@@ -40,7 +40,7 @@ namespace SchoolProject.Service.Implementation
         #region Handel Functions
         public async Task<JwtAuthResponse> GetJWTToken(User user)
         {
-            var roles = await _userManager.GetRolesAsync(user);
+
 
             var (token, accessToken) = await GenerateJwtToken(user);
 
@@ -66,8 +66,10 @@ namespace SchoolProject.Service.Implementation
             };
             return response;
         }
-        private List<Claim> GetClaims(User user, List<string> roles)
+        private async Task<List<Claim>> GetClaimsAsync(User user)
         {
+            var roles = await _userManager.GetRolesAsync(user);
+            var userClaims = await _userManager.GetClaimsAsync(user);
             var claims = new List<Claim>()
             {
                 new Claim(ClaimTypes.NameIdentifier, user.UserName),
@@ -75,6 +77,7 @@ namespace SchoolProject.Service.Implementation
                 new Claim(nameof(UserClaimModel.PhoneNumber), user.PhoneNumber),
                 new Claim(nameof(UserClaimModel.UserId), user.Id)
             };
+            claims.AddRange(userClaims);
             foreach (var role in roles)
             {
                 claims.Add(new Claim(ClaimTypes.Role, role));
@@ -136,7 +139,7 @@ namespace SchoolProject.Service.Implementation
         private async Task<(JwtSecurityToken, string)> GenerateJwtToken(User user)
         {
             var roles = await _userManager.GetRolesAsync(user);
-            var claims = GetClaims(user, roles.ToList());
+            var claims = await GetClaimsAsync(user);
             var token = new JwtSecurityToken(
                 _jwtSettings.Issuer,
                 _jwtSettings.Audience,
