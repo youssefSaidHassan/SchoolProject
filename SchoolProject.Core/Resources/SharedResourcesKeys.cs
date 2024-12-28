@@ -37,5 +37,10 @@
         public const string AddFailed = "AddFailed";
         public const string RoleIsUsed = "RoleIsUsed";
 
+        public const string Email = "Emails";
+        public const string EmailFailed = "EmailFailed";
+        public const string Message = "Message";
+
+
     }
 }

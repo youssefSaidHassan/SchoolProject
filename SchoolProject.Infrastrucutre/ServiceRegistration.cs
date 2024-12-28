@@ -36,6 +36,7 @@ namespace SchoolProject.Infrastructure
                 // User Settings
                 options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789._@+";
                 options.User.RequireUniqueEmail = true;
+                options.SignIn.RequireConfirmedEmail = true;
 
             })
             .AddEntityFrameworkStores<ApplicationDbContext>()
@@ -43,8 +44,11 @@ namespace SchoolProject.Infrastructure
 
             // Authentication
             var jwtSettings = new JwtSettings();
-            configuration.GetSection(nameof(JwtSettings)).Bind(jwtSettings);
+            var emailSettings = new EmailSettings();
+            configuration.GetSection(nameof(emailSettings)).Bind(emailSettings);
+            configuration.GetSection(nameof(jwtSettings)).Bind(jwtSettings);
             services.AddSingleton(jwtSettings);
+            services.AddSingleton(emailSettings);
 
             services.AddAuthentication(options =>
             {
