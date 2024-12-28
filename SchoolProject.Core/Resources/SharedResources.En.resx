@@ -201,4 +201,7 @@
   <data name="RoleIsUsed" xml:space="preserve">
     <value>Role Is Already Use</value>
   </data>
+  <data name="EmailFailed" xml:space="preserve">
+    <value>Operation to Send Email Failed</value>
+  </data>
 </root>

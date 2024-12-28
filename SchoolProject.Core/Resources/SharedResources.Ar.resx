@@ -138,8 +138,14 @@
   <data name="DepartmentId" xml:space="preserve">
     <value>رقم القسم </value>
   </data>
+  <data name="Email" xml:space="preserve">
+    <value>البريد الإلكترونى </value>
+  </data>
   <data name="EmailAddress" xml:space="preserve">
     <value>عنوان البريد الإلكترونى غير صحيح</value>
+  </data>
+  <data name="EmailFailed" xml:space="preserve">
+    <value>حدث خطأ أثناء إرسال الأيميل</value>
   </data>
   <data name="EmailIsExist" xml:space="preserve">
     <value>هذا البريد الإلكتروني موجود سابقاً</value>
@@ -155,6 +161,9 @@
   </data>
   <data name="MaximumLength50" xml:space="preserve">
     <value>لا يمكن أن يكون أكثر من 50 حرف</value>
+  </data>
+  <data name="Message" xml:space="preserve">
+    <value>الرسالة</value>
   </data>
   <data name="Name" xml:space="preserve">
     <value>الأسم</value>

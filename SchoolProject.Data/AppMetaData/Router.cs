@@ -42,6 +42,11 @@
             public const string Edit = $"{Prefix}Edit";
             public const string Delete = $"{Prefix}Delete/{{id}}";
         }
+        public static class EmailRouting
+        {
+            public const string Prefix = $"{rule}Email/";
+            public const string SendEmail = $"{Prefix}SendEmail";
+        }
         public static class AuthenticationRouting
         {
             public const string Prefix = $"{rule}Authentication/";
