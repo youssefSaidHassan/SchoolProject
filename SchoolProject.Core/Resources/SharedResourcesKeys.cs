@@ -40,6 +40,10 @@
         public const string Email = "Emails";
         public const string EmailFailed = "EmailFailed";
         public const string Message = "Message";
+        public const string EmailNotConfirmed = "EmailNotConfirmed";
+        public const string TryToRegisterAgain = "TryToRegisterAgain";
+        public const string ErrorInConfirmEmail = "ErrorInConfirmEmail";
+        public const string SuccessInConfirmEmail = "SuccessInConfirmEmail";
 
 
     }

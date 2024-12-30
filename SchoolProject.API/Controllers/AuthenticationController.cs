@@ -24,8 +24,16 @@ namespace SchoolProject.API.Controllers
 
             return NewResult(response);
         }
-        [HttpPost(Router.AuthenticationRouting.ValidateToken)]
+        [HttpGet(Router.AuthenticationRouting.ValidateToken)]
         public async Task<IActionResult> ValidateToken([FromQuery] AuthorizeUserQuery query)
+        {
+            var response = await _mediator.Send(query);
+
+            return NewResult(response);
+        }
+        [
+        HttpGet(Router.AuthenticationRouting.ConfirmEmail)]
+        public async Task<IActionResult> ConfirmEmail([FromQuery] ConfirmEmailQuery query)
         {
             var response = await _mediator.Send(query);
 

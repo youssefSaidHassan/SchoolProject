@@ -150,6 +150,12 @@
   <data name="EmailIsExist" xml:space="preserve">
     <value>هذا البريد الإلكتروني موجود سابقاً</value>
   </data>
+  <data name="EmailNotConfirmed" xml:space="preserve">
+    <value>من فضلك قم بتأكيد باريدك الإلكترونى</value>
+  </data>
+  <data name="ErrorInConfirmEmail" xml:space="preserve">
+    <value>حدث خطأ أثناء تأكيد البريد الإلكترونى</value>
+  </data>
   <data name="Exist" xml:space="preserve">
     <value>موجود سابقاً</value>
   </data>
@@ -207,11 +213,17 @@
   <data name="Success" xml:space="preserve">
     <value>تمت العملية بنجاح </value>
   </data>
+  <data name="SuccessInConfirmEmail" xml:space="preserve">
+    <value>تم تأكيد البريد الإلكترونى بنجاح</value>
+  </data>
   <data name="TokenIsExpired" xml:space="preserve">
     <value>رمز الوصول الذي تستخدمه منتهى الصلاحية </value>
   </data>
   <data name="TokenIsNotExpired" xml:space="preserve">
     <value>رمز الوصول الذي تستخدمه ليس منتهى</value>
+  </data>
+  <data name="TryToRegisterAgain" xml:space="preserve">
+    <value>حدث خطأ غير متوقع أعد المحاولة مرة أخرى</value>
   </data>
   <data name="Unauthorized" xml:space="preserve">
     <value>لا تمتلك الصلاحية للوصول لتلك المصادر</value>

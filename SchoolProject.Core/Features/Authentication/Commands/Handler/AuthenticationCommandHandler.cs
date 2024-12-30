@@ -50,14 +50,17 @@ namespace SchoolProject.Core.Features.Authentication.Commands.Handler
             //var result = await _signInManager.CheckPasswordSignInAsync(user, request.Password, false);
             var result = await _signInManager.PasswordSignInAsync(user, request.Password, false, false);
 
-            if (result.Succeeded)
+            if (!result.Succeeded)
             {
-                var token = await _authenticationService.GetJWTToken(user);
-                // return token
-                return Success(token);
+                return BadRequest<JwtAuthResponse>(_stringLocalizer[SharedResourcesKeys.SignInFailed]);
             }
-            return BadRequest<JwtAuthResponse>(_stringLocalizer[SharedResourcesKeys.SignInFailed]);
+            //check confirm email
+            if (!user.EmailConfirmed)
+                return BadRequest<JwtAuthResponse>(_stringLocalizer[SharedResourcesKeys.EmailNotConfirmed]);
             //generate token
+            var token = await _authenticationService.GetJWTToken(user);
+            // return token
+            return Success(token);
         }
 
         public async Task<Response<JwtAuthResponse>> Handle(RefreshTokenCommand request, CancellationToken cancellationToken)
