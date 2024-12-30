@@ -19,7 +19,7 @@ namespace SchoolProject.Service.Implementation
         #endregion
 
         #region Handel Functions
-        public async Task<string> SendEmailAsync(string email, string Message)
+        public async Task<string> SendEmailAsync(string email, string subject, string Message)
         {
             try
             {
@@ -38,7 +38,7 @@ namespace SchoolProject.Service.Implementation
                     };
                     message.From.Add(new MailboxAddress("Test Team", "youssef.rsys@gmail.com"));
                     message.To.Add(new MailboxAddress("testing", email));
-                    message.Subject = "new Contact Submitted Data";
+                    message.Subject = subject;
                     await client.SendAsync(message);
                     await client.DisconnectAsync(true);
                 }

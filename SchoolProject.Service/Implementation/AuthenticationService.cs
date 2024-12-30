@@ -1,10 +1,13 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using SchoolProject.Data.Entities.Identity;
 using SchoolProject.Data.Helpers;
 using SchoolProject.Data.Responses;
 using SchoolProject.Infrastructure.Abstract;
+using SchoolProject.Infrastructure.Data;
 using SchoolProject.Service.Abstracts;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -19,6 +22,10 @@ namespace SchoolProject.Service.Implementation
         private readonly JwtSettings _jwtSettings;
         private readonly IRefreshTokenRepository _refreshTokenRepository;
         private readonly UserManager<User> _userManager;
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly IEmailService _emailService;
+        private readonly ApplicationDbContext _context;
+        private readonly IUrlHelper _urlHelper;
 
         //private readonly ConcurrentDictionary<string, RefreshToken> _userRefreshToken;
 
@@ -27,11 +34,20 @@ namespace SchoolProject.Service.Implementation
         #region Constructors
         public AuthenticationService(JwtSettings jwtSettings,
             IRefreshTokenRepository refreshTokenRepository,
-            UserManager<User> userManager)
+            UserManager<User> userManager,
+            IHttpContextAccessor httpContextAccessor,
+            IEmailService emailService,
+            ApplicationDbContext context,
+            IUrlHelper urlHelper
+            )
         {
-            this._jwtSettings = jwtSettings;
-            this._refreshTokenRepository = refreshTokenRepository;
-            this._userManager = userManager;
+            _jwtSettings = jwtSettings;
+            _refreshTokenRepository = refreshTokenRepository;
+            _userManager = userManager;
+            _httpContextAccessor = httpContextAccessor;
+            _context = context;
+            _emailService = emailService;
+            _urlHelper = urlHelper;
             //_userRefreshToken = new ConcurrentDictionary<string, RefreshToken>();
         }
 
@@ -104,8 +120,6 @@ namespace SchoolProject.Service.Implementation
             randomNumberGenerate.GetBytes(randomNumber);
             return Convert.ToBase64String(randomNumber);
         }
-
-
 
         public async Task<JwtAuthResponse> GetRefreshToken(User user, string accessToken, string refreshToken)
         {
@@ -216,6 +230,54 @@ namespace SchoolProject.Service.Implementation
                 return "Refresh Token Is Not Expired";
             }
             return "Valid";
+        }
+
+        public async Task<string> RegisterUserAsync(User user, string password)
+        {
+
+            var trans = await _context.Database.BeginTransactionAsync();
+            try
+            {
+                // register user 
+                var result = await _userManager.CreateAsync(user, password);
+                //return response
+                if (!result.Succeeded)
+                {
+                    return string.Join("-", result.Errors.Select(x => x.Description));
+                }
+                await _userManager.AddToRoleAsync(user, "User");
+                // Send Confirm Email
+                var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                var requestAccessor = _httpContextAccessor.HttpContext.Request;
+                //var returnUrl = $"{requestAccessor.Scheme}://{requestAccessor.Host}/Api/V1/Authentication/ConfirmEmail?userId={user.Id}&code={code}";
+
+                var returnUrl = $"{requestAccessor.Scheme}://{requestAccessor.Host}{_urlHelper.Action("ConfirmEmail", "Authentication", new { userId = user.Id, code = code })}";
+
+                //message 
+                var sendEmailResult = await _emailService.SendEmailAsync(user.Email, "Confirm Your Email", returnUrl);
+                if (sendEmailResult != "Success")
+                    return "FailedToSendEmail";
+                else
+                    await trans.CommitAsync();
+                return "Success";
+            }
+            catch (Exception)
+            {
+                await trans.RollbackAsync();
+                return "FailedToAddUser";
+            }
+
+        }
+
+        public async Task<string> ConfirmEmail(string useIdr, string code)
+        {
+            var user = await _userManager.FindByIdAsync(useIdr);
+            var confirm = await _userManager.ConfirmEmailAsync(user, code);
+            if (!confirm.Succeeded)
+            {
+                return "Error";
+            }
+            return "Success";
         }
 
 

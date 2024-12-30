@@ -30,7 +30,7 @@ namespace SchoolProject.Core.Features.Emails.Commands.Handler
 
         public async Task<Response<string>> Handle(SendEmailCommand request, CancellationToken cancellationToken)
         {
-            var response = await _emailService.SendEmailAsync(request.Email, request.Message);
+            var response = await _emailService.SendEmailAsync(request.Email, "Test Email", request.Message);
             if (response == "Success")
                 return Success<string>("");
             else

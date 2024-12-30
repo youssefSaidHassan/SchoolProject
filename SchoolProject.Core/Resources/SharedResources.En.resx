@@ -204,4 +204,16 @@
   <data name="EmailFailed" xml:space="preserve">
     <value>Operation to Send Email Failed</value>
   </data>
+  <data name="EmailNotConfirmed" xml:space="preserve">
+    <value>Please Confirm Your Email </value>
+  </data>
+  <data name="TryToRegisterAgain" xml:space="preserve">
+    <value>Operation is Failed Try to Register Again</value>
+  </data>
+  <data name="ErrorInConfirmEmail" xml:space="preserve">
+    <value>Error Occure In Confirm Email</value>
+  </data>
+  <data name="SuccessInConfirmEmail" xml:space="preserve">
+    <value>Success In Confirm Email</value>
+  </data>
 </root>
