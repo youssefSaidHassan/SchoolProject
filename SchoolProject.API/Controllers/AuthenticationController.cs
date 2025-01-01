@@ -31,11 +31,31 @@ namespace SchoolProject.API.Controllers
 
             return NewResult(response);
         }
-        [
-        HttpGet(Router.AuthenticationRouting.ConfirmEmail)]
+        [HttpGet(Router.AuthenticationRouting.ConfirmEmail)]
         public async Task<IActionResult> ConfirmEmail([FromQuery] ConfirmEmailQuery query)
         {
             var response = await _mediator.Send(query);
+
+            return NewResult(response);
+        }
+        [HttpPost(Router.AuthenticationRouting.SendResetPassword)]
+        public async Task<IActionResult> SendResetPassword([FromForm] SendResetPasswordCommand command)
+        {
+            var response = await _mediator.Send(command);
+
+            return NewResult(response);
+        }
+        [HttpGet(Router.AuthenticationRouting.ConfirmResetPassword)]
+        public async Task<IActionResult> ConfirmResetPassword([FromQuery] ConfirmResetPasswordQuery query)
+        {
+            var response = await _mediator.Send(query);
+
+            return NewResult(response);
+        }
+        [HttpPost(Router.AuthenticationRouting.ResetPassword)]
+        public async Task<IActionResult> ResetPassword([FromForm] ResetPasswordCommand command)
+        {
+            var response = await _mediator.Send(command);
 
             return NewResult(response);
         }

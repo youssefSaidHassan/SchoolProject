@@ -17,11 +17,12 @@ namespace SchoolProject.Infrastructure.Data
 
         }
 
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
             modelBuilder.HasDefaultSchema("school");
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
-            base.OnModelCreating(modelBuilder);
         }
         public DbSet<User> Users { get; set; }
 

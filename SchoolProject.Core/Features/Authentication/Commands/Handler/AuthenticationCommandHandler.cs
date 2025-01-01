@@ -13,7 +13,9 @@ namespace SchoolProject.Core.Features.Authentication.Commands.Handler
 {
     public class AuthenticationCommandHandler : ResponseHandler,
     IRequestHandler<SingInCommand, Response<JwtAuthResponse>>,
-    IRequestHandler<RefreshTokenCommand, Response<JwtAuthResponse>>
+    IRequestHandler<RefreshTokenCommand, Response<JwtAuthResponse>>,
+    IRequestHandler<SendResetPasswordCommand, Response<string>>,
+    IRequestHandler<ResetPasswordCommand, Response<string>>
     {
         #region Fileds
         private readonly IStringLocalizer<SharedResources> _stringLocalizer;
@@ -92,6 +94,38 @@ namespace SchoolProject.Core.Features.Authentication.Commands.Handler
             var result = await _authenticationService.GetRefreshToken(user, request.AccessToken, request.RefreshToken);
 
             return Success(result);
+        }
+
+        public async Task<Response<string>> Handle(SendResetPasswordCommand request, CancellationToken cancellationToken)
+        {
+            var result = await _authenticationService.SendResetPasswordCode(request.Email);
+            switch (result)
+            {
+                case "UserNotFound":
+                    return BadRequest<string>(_stringLocalizer[SharedResourcesKeys.NotFound]);
+                case "Success":
+                    return Success("");
+                case "ErrorInUpdateUserCode":
+                case "Failed":
+                case "FailedToSendEmail":
+                default:
+                    return BadRequest<string>(_stringLocalizer[SharedResourcesKeys.TryAgain]);
+            }
+        }
+
+        public async Task<Response<string>> Handle(ResetPasswordCommand request, CancellationToken cancellationToken)
+        {
+            var result = await _authenticationService.ResetPassword(request.Email, request.Password);
+            switch (result)
+            {
+                case "UserNotFound":
+                    return BadRequest<string>(_stringLocalizer[SharedResourcesKeys.NotFound]);
+                case "Success":
+                    return Success("");
+                case "Failed":
+                default:
+                    return BadRequest<string>(_stringLocalizer[SharedResourcesKeys.TryAgain]);
+            }
         }
         #endregion
     }
