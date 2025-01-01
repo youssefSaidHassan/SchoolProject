@@ -14,5 +14,8 @@ namespace SchoolProject.Service.Abstracts
         public Task<string> ValidateToken(string accessToken);
         public Task<string> RegisterUserAsync(User user, string password);
         public Task<string> ConfirmEmail(string useIdr, string code);
+        public Task<string> SendResetPasswordCode(string email);
+        public Task<string> ConfirmResetPassword(string code, string email);
+        public Task<string> ResetPassword(string email, string paswword);
     }
 }

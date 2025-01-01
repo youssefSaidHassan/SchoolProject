@@ -26,6 +26,7 @@ namespace SchoolProject.Service.Implementation
         private readonly IEmailService _emailService;
         private readonly ApplicationDbContext _context;
         private readonly IUrlHelper _urlHelper;
+        private readonly IEncryptionService _encryptionService;
 
         //private readonly ConcurrentDictionary<string, RefreshToken> _userRefreshToken;
 
@@ -38,7 +39,8 @@ namespace SchoolProject.Service.Implementation
             IHttpContextAccessor httpContextAccessor,
             IEmailService emailService,
             ApplicationDbContext context,
-            IUrlHelper urlHelper
+            IUrlHelper urlHelper,
+            IEncryptionService encryptionService
             )
         {
             _jwtSettings = jwtSettings;
@@ -47,6 +49,7 @@ namespace SchoolProject.Service.Implementation
             _httpContextAccessor = httpContextAccessor;
             _context = context;
             _emailService = emailService;
+            _encryptionService = encryptionService;
             _urlHelper = urlHelper;
             //_userRefreshToken = new ConcurrentDictionary<string, RefreshToken>();
         }
@@ -278,6 +281,76 @@ namespace SchoolProject.Service.Implementation
                 return "Error";
             }
             return "Success";
+        }
+
+        public async Task<string> SendResetPasswordCode(string email)
+        {
+            var trans = await _context.Database.BeginTransactionAsync();
+            try
+            {
+
+                var user = await _userManager.FindByEmailAsync(email);
+                if (user == null)
+                    return "UserNotFound";
+                Random random = new Random();
+                string randomNumber = random.Next(0, 100000).ToString("D6");
+                //Encrypt
+                user.Code = _encryptionService.Encrypt(randomNumber);
+                var updateResult = await _userManager.UpdateAsync(user);
+                if (!updateResult.Succeeded)
+                    return "ErrorInUpdateUserCode";
+                var message = $"Code To Reset Password {randomNumber}";
+                var sendEmailResult = await _emailService.SendEmailAsync(email, "Reset Password", message);
+                if (sendEmailResult == "Success")
+                {
+                    await trans.CommitAsync();
+                    return "Success";
+                }
+                else
+                    return "FailedToSendEmail";
+            }
+            catch (Exception)
+            {
+
+                await trans.RollbackAsync();
+                return "Failed";
+            }
+        }
+
+        public async Task<string> ConfirmResetPassword(string code, string email)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+            if (user == null)
+            {
+                return "UserNotFound";
+            }
+            // decrypt
+            var resetPasswordCode = _encryptionService.Decrypt(user.Code);
+            if (resetPasswordCode == code) return "Success";
+            return "Failed";
+        }
+
+        public async Task<string> ResetPassword(string email, string paswword)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+            if (user == null)
+            {
+                return "UserNotFound";
+            }
+            var trans = _context.Database.BeginTransaction();
+            try
+            {
+                await _userManager.RemovePasswordAsync(user);
+                await _userManager.AddPasswordAsync(user, paswword);
+                await trans.CommitAsync();
+                return "Success";
+            }
+            catch (Exception)
+            {
+
+                await trans.RollbackAsync();
+                return "Failed";
+            }
         }
 
 

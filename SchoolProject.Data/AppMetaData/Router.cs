@@ -53,6 +53,9 @@
             public const string SignIn = $"{Prefix}SignIn";
             public const string RefreshToken = $"{Prefix}RefreshToken";
             public const string ValidateToken = $"{Prefix}ValidateToken";
+            public const string SendResetPassword = $"{Prefix}SendResetPasswordCode";
+            public const string ConfirmResetPassword = $"{Prefix}ConfirmResetPassword";
+            public const string ResetPassword = $"{Prefix}ResetPassword";
             public const string ConfirmEmail = $"/Api/Authentication/ConfirmEmail";
 
         }

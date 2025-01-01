@@ -216,4 +216,10 @@
   <data name="SuccessInConfirmEmail" xml:space="preserve">
     <value>Success In Confirm Email</value>
   </data>
+  <data name="TryAgain" xml:space="preserve">
+    <value>An Error Occurred Please Try Again</value>
+  </data>
+  <data name="InvalidCode" xml:space="preserve">
+    <value>Invalid Code</value>
+  </data>
 </root>

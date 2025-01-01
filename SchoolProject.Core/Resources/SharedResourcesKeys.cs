@@ -44,6 +44,8 @@
         public const string TryToRegisterAgain = "TryToRegisterAgain";
         public const string ErrorInConfirmEmail = "ErrorInConfirmEmail";
         public const string SuccessInConfirmEmail = "SuccessInConfirmEmail";
+        public const string TryAgain = "TryAgain";
+        public const string InvalidCode = "InvalidCode";
 
 
     }

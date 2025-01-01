@@ -162,6 +162,9 @@
   <data name="FailedToAddUser" xml:space="preserve">
     <value>حدث خطأ أثناء إضافة المستخدم</value>
   </data>
+  <data name="InvalidCode" xml:space="preserve">
+    <value>رمز التأكد غير صحيح </value>
+  </data>
   <data name="MaximumLength10" xml:space="preserve">
     <value>لا يمكن ان يكون اكثر من 10 حروف</value>
   </data>
@@ -221,6 +224,9 @@
   </data>
   <data name="TokenIsNotExpired" xml:space="preserve">
     <value>رمز الوصول الذي تستخدمه ليس منتهى</value>
+  </data>
+  <data name="TryAgain" xml:space="preserve">
+    <value>حدث خطأ حاول مرة أخرى</value>
   </data>
   <data name="TryToRegisterAgain" xml:space="preserve">
     <value>حدث خطأ غير متوقع أعد المحاولة مرة أخرى</value>
