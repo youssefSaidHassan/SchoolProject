@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using SchoolProject.API.Bases;
 using SchoolProject.Core.Features.Students.Commands.Models;
 using SchoolProject.Core.Features.Students.Queries.Models;
+using SchoolProject.Core.Filters;
 using SchoolProject.Data.AppMetaData;
 
 namespace SchoolProject.API.Controllers
@@ -14,12 +15,14 @@ namespace SchoolProject.API.Controllers
     {
 
         [HttpGet(Router.StudentRouting.List)]
+        [ServiceFilter(typeof(AuthFilter))]
         public async Task<IActionResult> GetStudentList()
         {
             var response = await _mediator.Send(new GetStudentListQuery());
             return Ok(response);
         }
         [AllowAnonymous]
+
         [HttpGet(Router.StudentRouting.Paginated)]
         public async Task<IActionResult> Paginated([FromQuery] GetStudentPaginatedListQuery query)
         {
