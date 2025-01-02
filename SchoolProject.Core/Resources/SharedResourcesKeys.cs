@@ -23,7 +23,30 @@
         public const string EmailIsExist = "EmailIsExist";
         public const string FailedToAddUser = "FailedToAddUser";
         public const string UpdateFailed = "UpdateFailed";
-        public const string DeleteFailed = "DeleteFailed";
+        public const string UserName = "UserName";
+        public const string Password = "Password";
+        public const string UserNameNotExist = "UserNameNotExist";
+        public const string SignInFailed = "SignInFailed";
+
+        public const string AlgorithmIsWrong = "AlgorithmIsWrong";
+        public const string TokenIsNotExpired = "TokenIsNotExpired";
+        public const string RefreshTokenIsNotFound = "RefreshTokenIsNotFound";
+        public const string RefreshTokenIsNotExpired = "RefreshTokenIsNotExpired";
+        public const string TokenIsExpired = "TokenIsExpired";
+
+        public const string AddFailed = "AddFailed";
+        public const string RoleIsUsed = "RoleIsUsed";
+
+        public const string Email = "Emails";
+        public const string EmailFailed = "EmailFailed";
+        public const string Message = "Message";
+        public const string EmailNotConfirmed = "EmailNotConfirmed";
+        public const string TryToRegisterAgain = "TryToRegisterAgain";
+        public const string ErrorInConfirmEmail = "ErrorInConfirmEmail";
+        public const string SuccessInConfirmEmail = "SuccessInConfirmEmail";
+        public const string TryAgain = "TryAgain";
+        public const string InvalidCode = "InvalidCode";
+
 
     }
 }
