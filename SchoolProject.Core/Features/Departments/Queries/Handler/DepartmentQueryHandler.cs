@@ -13,7 +13,8 @@ using System.Linq.Expressions;
 namespace SchoolProject.Core.Features.Departments.Queries.Handler
 {
     public class DepartmentQueryHandler : ResponseHandler,
-        IRequestHandler<GetDepartmentByIdQuery, Response<GetDepartmentByIdQueryResponse>>
+        IRequestHandler<GetDepartmentByIdQuery, Response<GetDepartmentByIdQueryResponse>>,
+        IRequestHandler<GetDepartmentStudentCountQuery, Response<List<GetDepartmentStudentCountResponse>>>
     {
         #region Fileds
         private readonly IDepartmentServices _departmentServices;
@@ -32,6 +33,7 @@ namespace SchoolProject.Core.Features.Departments.Queries.Handler
             this._studentService = studentService;
             this._stringLocalizer = stringLocalizer;
         }
+
 
 
 
@@ -62,6 +64,14 @@ namespace SchoolProject.Core.Features.Departments.Queries.Handler
             // return response
             return Success(departmentMapping);
         }
+
+        public async Task<Response<List<GetDepartmentStudentCountResponse>>> Handle(GetDepartmentStudentCountQuery request, CancellationToken cancellationToken)
+        {
+            var result = await _departmentServices.GetViewDepartmentDataAsync();
+            var resultMapping = _mapper.Map<List<GetDepartmentStudentCountResponse>>(result);
+            return Success(resultMapping);
+        }
+
         #endregion
     }
 }

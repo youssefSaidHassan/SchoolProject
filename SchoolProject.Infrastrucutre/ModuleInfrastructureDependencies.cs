@@ -1,7 +1,10 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using SchoolProject.Data.Entities.Views;
 using SchoolProject.Infrastructure.Abstract;
+using SchoolProject.Infrastructure.Abstract.Views;
 using SchoolProject.Infrastructure.InfrastructureBases;
 using SchoolProject.Infrastructure.Repositories;
+using SchoolProject.Infrastructure.Repositories.Views;
 
 namespace SchoolProject.Infrastructure
 {
@@ -15,6 +18,8 @@ namespace SchoolProject.Infrastructure
             services.AddScoped<ISubjectRepository, SubjectRepository>();
             services.AddScoped<IDepartmentRepository, DepartmentRepository>();
             services.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>();
+            // views
+            services.AddScoped<IViewRepository<ViewDepartment>, ViewDepartmentRepository>();
 
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             return services;

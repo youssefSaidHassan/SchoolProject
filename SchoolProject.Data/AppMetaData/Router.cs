@@ -20,7 +20,8 @@
         }
         public static class DepartmentRouting
         {
-            public const string Prefix = $"{rule}Deaprtment/";
+            public const string Prefix = $"{rule}Department/";
+            public const string GetDepartmentStudentCount = $"{Prefix}GetDepartmentStudentCount";
             public const string List = $"{Prefix}List";
             public const string Paginated = $"{Prefix}Paginated";
             public const string GetById = $"{Prefix}Id";
