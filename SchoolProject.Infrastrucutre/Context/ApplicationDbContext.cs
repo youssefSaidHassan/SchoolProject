@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using SchoolProject.Data.Entities;
 using SchoolProject.Data.Entities.Identity;
+using SchoolProject.Data.Entities.Views;
 using System.Reflection;
 
 namespace SchoolProject.Infrastructure.Data
@@ -35,6 +36,9 @@ namespace SchoolProject.Infrastructure.Data
         public DbSet<DepartmentSubject> DepartmentSubjects { get; set; }
         public DbSet<StudentSubject> StudentSubjects { get; set; }
         public DbSet<InstructorSubject> InstructorSubjects { get; set; }
+        #region Views
+        public DbSet<ViewDepartment> ViewDepartment { get; set; }
 
+        #endregion
     }
 }

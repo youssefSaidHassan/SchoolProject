@@ -17,6 +17,7 @@ namespace SchoolProject.Service
             services.AddTransient<IEmailService, EmailService>();
             services.AddScoped<IEncryptionService, EncryptionService>();
             services.AddScoped<ICurrentUserService, CurrentUserService>();
+            services.AddScoped<IInstructorService, InstructorService>();
             return services;
         }
     }
