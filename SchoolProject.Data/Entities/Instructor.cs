@@ -21,6 +21,7 @@ namespace SchoolProject.Data.Entities
         public string? Position { get; set; }
         public int? SupervisorId { get; set; }
         public decimal? Salary { get; set; }
+        public string? ImageUrl { get; set; }
         public int? DepartmentId { get; set; }
 
 

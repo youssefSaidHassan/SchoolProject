@@ -22,6 +22,8 @@
         {
             public const string Prefix = $"{rule}Department/";
             public const string GetDepartmentStudentCount = $"{Prefix}GetDepartmentStudentCount";
+            public const string GetDepartmentStudentCountById = $"{Prefix}GetDepartmentStudentCountById/{{Id}}";
+
             public const string List = $"{Prefix}List";
             public const string Paginated = $"{Prefix}Paginated";
             public const string GetById = $"{Prefix}Id";
@@ -75,6 +77,12 @@
             public const string MangeUserClaims = $"{Claims}MangeUserClaims/{{userId}}";
             public const string UpdateUserClaims = $"{Claims}/UpdateUserClaims";
 
+        }
+
+        public static class InstructorRouting
+        {
+            public const string Prefix = $"{rule}Instructor/";
+            public const string GetSalarySummation = $"{Prefix}GetSalarySummation/";
         }
 
     }
