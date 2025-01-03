@@ -6,6 +6,7 @@ namespace SchoolProject.Core.Mapping.InstructorsMapping
     {
         public InstructorProfile()
         {
+            AddInstructorMapping();
         }
     }
 }

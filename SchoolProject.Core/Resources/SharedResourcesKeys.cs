@@ -23,6 +23,7 @@
         public const string EmailIsExist = "EmailIsExist";
         public const string FailedToAddUser = "FailedToAddUser";
         public const string UpdateFailed = "UpdateFailed";
+        public const string DeleteFailed = "DeleteFailed";
         public const string UserName = "UserName";
         public const string Password = "Password";
         public const string UserNameNotExist = "UserNameNotExist";
@@ -46,6 +47,9 @@
         public const string SuccessInConfirmEmail = "SuccessInConfirmEmail";
         public const string TryAgain = "TryAgain";
         public const string InvalidCode = "InvalidCode";
+        public const string FailedToUpload = "FailedToUploadFile";
+        public const string NoImage = "NoImage";
+
 
 
     }

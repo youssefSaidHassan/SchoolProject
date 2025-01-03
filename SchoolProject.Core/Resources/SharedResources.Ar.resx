@@ -135,6 +135,9 @@
   <data name="Deleted" xml:space="preserve">
     <value>تم الحذف بنجاح </value>
   </data>
+  <data name="DeleteFailed" xml:space="preserve">
+    <value>حدث خطأ أثناء عملية حذف البيانات</value>
+  </data>
   <data name="DepartmentId" xml:space="preserve">
     <value>رقم القسم </value>
   </data>
@@ -162,6 +165,9 @@
   <data name="FailedToAddUser" xml:space="preserve">
     <value>حدث خطأ أثناء إضافة المستخدم</value>
   </data>
+  <data name="FailedToUploadFile" xml:space="preserve">
+    <value>حدث خطأ أثناء رفع الملف </value>
+  </data>
   <data name="InvalidCode" xml:space="preserve">
     <value>رمز التأكد غير صحيح </value>
   </data>
@@ -176,6 +182,9 @@
   </data>
   <data name="Name" xml:space="preserve">
     <value>الأسم</value>
+  </data>
+  <data name="NoImage" xml:space="preserve">
+    <value>عفواً لا يوجد صورة </value>
   </data>
   <data name="NotEmpty" xml:space="preserve">
     <value>لا يمكن أن يكون فارغاً</value>
