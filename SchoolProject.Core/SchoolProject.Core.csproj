@@ -24,6 +24,7 @@
     <Folder Include="Features\Authentication\Commands\Responses\" />
     <Folder Include="Features\Departments\Commands\" />
     <Folder Include="Features\Emails\Queries\" />
+    <Folder Include="Features\Instructors\Commands\Validator\" />
     <Folder Include="Features\Instructors\Queries\Response\" />
     <Folder Include="Features\Students\Commands\Responses\" />
     <Folder Include="Mapping\DepartmentsMapping\CommandMapping\" />

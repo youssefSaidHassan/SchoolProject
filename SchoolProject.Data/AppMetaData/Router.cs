@@ -84,7 +84,8 @@
         public static class InstructorRouting
         {
             public const string Prefix = $"{rule}Instructor/";
-            public const string GetSalarySummation = $"{Prefix}GetSalarySummation/";
+            public const string GetSalarySummation = $"{Prefix}GetSalarySummation";
+            public const string CreateInstructor = $"{Prefix}CreateInstructor";
         }
 
     }

@@ -222,4 +222,10 @@
   <data name="InvalidCode" xml:space="preserve">
     <value>Invalid Code</value>
   </data>
+  <data name="FailedToUploadFile" xml:space="preserve">
+    <value>Failed To Upload File</value>
+  </data>
+  <data name="NoImage" xml:space="preserve">
+    <value>No Image Uploaded</value>
+  </data>
 </root>
