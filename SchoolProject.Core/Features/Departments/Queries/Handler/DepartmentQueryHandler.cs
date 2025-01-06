@@ -9,6 +9,7 @@ using SchoolProject.Core.Wrappers;
 using SchoolProject.Data.Entities;
 using SchoolProject.Data.Entities.Procedures;
 using SchoolProject.Service.Abstracts;
+using Serilog;
 using System.Linq.Expressions;
 
 namespace SchoolProject.Core.Features.Departments.Queries.Handler
@@ -63,6 +64,7 @@ namespace SchoolProject.Core.Features.Departments.Queries.Handler
             var studentQurable = _studentService.GetStudentsQuerableByDepartmentId(request.Id);
             var paginatedQurable = await studentQurable.Select(expression).ToPaginatedListAsync(request.StudentPageNumber, request.StudentPageSize);
             departmentMapping.Students = paginatedQurable;
+            Log.Information($"Get Department By Id {request.Id}!");
             // return response
             return Success(departmentMapping);
         }
