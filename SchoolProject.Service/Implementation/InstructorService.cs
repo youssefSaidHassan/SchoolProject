@@ -57,7 +57,7 @@ namespace SchoolProject.Service.Implementation
                 throw;
             }
         }
-        public Task<decimal> GetSalarySummationOfInstructor()
+        public async Task<decimal> GetSalarySummationOfInstructor()
         {
             decimal result = 0;
             using (var cmd = _context.Database.GetDbConnection().CreateCommand())
@@ -67,8 +67,9 @@ namespace SchoolProject.Service.Implementation
                     cmd.Connection.Open();
                 }
                 result = _instructorFunctionsRepository.GetSalarySummationOfInstructor("select dbo.GetSalarySummation()", cmd);
+                await cmd.Connection.CloseAsync();
             }
-            return Task.FromResult(result);
+            return result;
         }
 
         #endregion

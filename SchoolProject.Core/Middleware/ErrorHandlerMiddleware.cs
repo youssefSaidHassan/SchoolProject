@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using SchoolProject.Core.Bases;
+using Serilog;
 using System.Net;
 using System.Text.Json;
 
@@ -15,6 +16,7 @@ namespace SchoolProject.Core.Middleware
         {
             _next = next;
         }
+
         public async Task Invoke(HttpContext context)
         {
             try
@@ -26,6 +28,8 @@ namespace SchoolProject.Core.Middleware
                 var response = context.Response;
                 response.ContentType = "application/json";
                 var responseModel = new Response<string>() { Succeeded = false, Message = error?.Message };
+                Log.Error(error, error.Message, context.Request, "");
+
                 //TODO:: cover all validation errors
                 switch (error)
                 {
@@ -44,7 +48,7 @@ namespace SchoolProject.Core.Middleware
                         break;
                     case KeyNotFoundException e:
                         // not found error
-                        responseModel.Message = error.Message; ;
+                        responseModel.Message = error.Message;
                         responseModel.StatusCode = HttpStatusCode.NotFound;
                         response.StatusCode = (int)HttpStatusCode.NotFound;
                         break;
@@ -83,4 +87,5 @@ namespace SchoolProject.Core.Middleware
             }
         }
     }
+
 }
